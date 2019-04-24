@@ -16,23 +16,11 @@ int expand(int array[4][5], int x, int y, int sofar)
 {
 	bool expandable = false;
 
-	cout << "so far: " << sofar << endl;
-	for (int i = 0; i < xDim; i++)
-	{
-		for (int j = 0; j < yDim; j++)
-		{
-			cout << explored[i][j] << " ";
-		}
-		cout << endl;
-	}
-	cout << endl;
-
 	// if not on bottom row
 	if (x < xDim - 1)
 	{
 		if (array[x + 1][y] == 1 && explored[x + 1][y] == 0)
 		{
-			cout << "under: " << x + 1 << "," << y << endl;
 			expandable = true;
 			explored[x + 1][y] = 1;
 			sofar += expand(array, x + 1, y, sofar);
@@ -43,7 +31,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 		{
 			if (array[x + 1][y + 1] == 1 && explored[x + 1][y + 1] == 0)
 			{
-				cout << "down right: " << x + 1 << "," << y + 1 << endl;
 				expandable = true;
 				explored[x + 1][y + 1] = 1;
 				sofar += expand(array, x + 1, y + 1, sofar);
@@ -55,7 +42,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 		{
 			if (array[x + 1][y - 1] == 1 && explored[x + 1][y - 1] == 0)
 			{
-				cout << "down left: " << x + 1 << "," << y - 1 << endl;
 				expandable = true;
 				explored[x + 1][y - 1] = 1;
 				sofar += expand(array, x + 1, y - 1, sofar);
@@ -68,7 +54,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 	{
 		if (array[x][y + 1] == 1  && explored[x][y + 1] == 0)
 		{
-			cout << "right: " << x << "," << y + 1 << endl;
 			expandable = true;
 			explored[x][y + 1] = 1;
 			sofar += expand(array, x, y + 1, sofar);
@@ -80,7 +65,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 	{
 		if (array[x][y - 1] == 1  && explored[x][y - 1] == 0)
 		{
-			cout << "left: " << x << "," << y - 1 << endl;
 			expandable = true;
 			explored[x][y - 1] = 1;
 			sofar += expand(array, x, y - 1, sofar);
@@ -92,7 +76,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 	{
 		if (array[x - 1][y] == 1 && explored[x - 1][y] == 0)
 		{
-			cout << "over: " << x - 1 << "," << y << endl;
 			expandable = true;
 			explored[x - 1][y] = 1;
 			sofar += expand(array, x - 1, y, sofar);
@@ -103,7 +86,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 		{
 			if (array[x - 1][y + 1] == 1 && explored[x - 1][y + 1] == 0)
 			{
-				cout << "up right: " << x - 1 << "," << y + 1 << endl;
 				expandable = true;
 				explored[x - 1][y + 1] = 1;
 				sofar += expand(array, x - 1, y + 1, sofar);
@@ -115,7 +97,6 @@ int expand(int array[4][5], int x, int y, int sofar)
 		{
 			if (array[x - 1][y - 1] == 1  && explored[x - 1][y - 1] == 0)
 			{
-				cout << "up left: " << x - 1 << "," << y - 1 << endl;
 				expandable = true;
 				explored[x - 1][y - 1] = 1;
 				sofar += expand(array, x - 1, y - 1, sofar);
@@ -161,10 +142,18 @@ int main(int argc, char **argv)
 			break;
 	}
 
-	cout << "start " << x << "," << y << endl;
 	explored[x][y] = 1;
 
-	cout << expand(array, x, y, 0) + 1 << endl;
+	for (int i = 0; i < xDim; i++)
+	{
+		for (int j = 0; j < yDim; j++)
+		{
+			cout << array[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	cout << endl << expand(array, x, y, 0) + 1 << " connected nodes in the array." << endl;
 
 	return 0;
 }
